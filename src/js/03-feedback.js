@@ -13,7 +13,7 @@ const parsedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 getData();
 
 function onFormInput() {
-    storageData = {
+    const storageData = {
         mail: inputEmail.value,
         message: textareaMessage.value,
     };
