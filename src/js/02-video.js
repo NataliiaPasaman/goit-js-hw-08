@@ -7,6 +7,7 @@ const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
 player.on('timeupdate', throttle(onStopTime, 1000));
+currentTimePlayer();
 
 function onStopTime(timeUpdate) {
   let timePause = timeUpdate.seconds;
@@ -15,16 +16,10 @@ function onStopTime(timeUpdate) {
   localStorage.setItem(PLAY_TIME, timePause);
 }
 
-const pause = localStorage.getItem(PLAY_TIME);
+function currentTimePlayer() {
+  const pause = localStorage.getItem(PLAY_TIME);
 
-player.setCurrentTime(pause).then(function() {
-  console.log(pause);
-}).catch(function(error) {
-  switch (error.name) {
-      case 'RangeError':
-          break;
-
-      default:
-          break;
+  if (pause) {
+    player.setCurrentTime(pause);
   }
-});
+}
